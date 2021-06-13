@@ -1,4 +1,4 @@
-# Adonis Blog Demo :triangular_ruler:
+# Yawa Adonis Blog Demo by IMPACT SOLUTION:triangular_ruler:
 
 This repo contains an example application of the Adonis Framework. You must checkout the source code or the API docs on official website to learn more.
 
@@ -6,7 +6,7 @@ This repo contains an example application of the Adonis Framework. You must chec
 <hr />
 <br />
 
-<img src="http://res.cloudinary.com/adonisjs/image/upload/q_100/v1497112678/adonis-purple_pzkmzt.svg" width="200px" align="right" hspace="30px" vspace="140px">
+<img src="https://impactsolution.sn/assets/images/fg-660x199.png" width="200px" align="right" hspace="30px" vspace="140px">
 
 ## What's in the box?
 
