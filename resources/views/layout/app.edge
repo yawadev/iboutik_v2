@@ -3,31 +3,211 @@
 <head>
   {{-- Meta Information --}}
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name=viewport content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  {{-- Title --}}
-  <title>{{ title }} | Adonis</title>
+  <title>:: ITRANS :: by IMPACT SOLUTION</title>
+    <link rel="stylesheet" href="/assets/plugins/nestable/jquery-nestable.css" />
+    <link rel="manifest" href="/manifest.json" />
+    <!-- Bootstrap Core and vandor -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/plugins/sweetalert/sweetalert.css" />
+    <link rel="stylesheet" href="/assets/bundles/datatables/datatables.min.css">
+    <link rel="stylesheet" href="/assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
+    <script type="text/javascript" src="/assets/js/qrCode/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/js/qrCode/qrcode.js"></script>
+    <script type="text/javascript" src="/assets/js/pdf/dist/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://kit.fontawesome.com/de2c880381.js" crossorigin="anonymous"></script>
+    <script>
+     window.addEventListener('load', ()=>{
+         if("serviceWorker" in navigator){
+             navigator.serviceWorker.register('/sw.js')
+         }
+     })
+    </script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+       $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                var art = $(".myArt");
+                $('.myArt').each(function() { 
+                    if( $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)) {  
+                        $(this.art).show(); 
+                    } else {
+                        $(this.art).hide(); 
+                    }
+                });
+            });
+            var qrcode = new QRCode(document.querySelector('#qrcode'), {
+                width : 100,
+                height : 100
+            });
+            function makeCode () {		
+                var elText = document.querySelector('#qrId');
+                
+                if (!elText.value) {
+                    elText.focus();
+                    return;
+                }
+                
+                qrcode.makeCode(elText.value);
+            }
+            makeCode();
+            $("#qrId").
+                on("blur", function () {
+                    makeCode();
+                }).
+                on("keydown", function (e) {
+                    if (e.keyCode == 13) {
+                        makeCode();
+                    }
+                });
+            
+           
+        });
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcqLBgaAAAAAHq2tSc6FbNIT38ZOx-NwmtUHO3c"></script>
+     <script>
+        function onClick(e) {
+            e.preventDefault();
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LcqLBgaAAAAAHq2tSc6FbNIT38ZOx-NwmtUHO3c', {
+                    action: 'submit'
+                }).then(function(token) {
 
-  {{-- Scripts --}}
-  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+                });
+            });
+        }
+    </script>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://use.fontawesome.com/3573be0805.js"></script>
+    <!-- Core css -->
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/theme1.css" />
 
-  {{-- CSS --}}
-  <link rel="stylesheet" href="/app.css">
 </head>
-<body class="bg-gray-50">
-  {{--
-    Include a partial into the view
-    ref: http://edge.adonisjs.com/docs/partials
-    --}}
-  @include('layout.partials.header')
+<body class="font-montserrat">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div id="loader" class="loader">
+        </div>
+    </div>
+<div id="main_content">
+    @loggedIn
+        @include('layout.partials.header')
+        @include('layout.partials.rightsidebar')
+        @include('layout.partials.theme')
+        @include('layout.partials.user')
+        @include('layout.partials.left')
+        <div class="page">
+            @include('layout.partials.top')
+            @!section('content')
+            @include('layout.partials.footer')
+        </div>
+    @else
+        @!section('content')
+    @endloggedIn
+</div>
+<!-- Page Specific JS File -->
 
-  <div class="container px-4 mx-auto">
-    {{--
-      Display the section content
-      ref: http://edge.adonisjs.com/docs/layouts#_basic_example
-      --}}
-    @!section('content')
-  </div>
+<script src="/assets/js/page/datatables.js"></script>
+<script src="/assets/bundles/lib.vendor.bundle.js"></script>
+<script src="/assets/bundles/knobjs.bundle.js"></script>
+<script src="/assets/bundles/nestable.bundle.js"></script>
+<script src="/assets/js/page/sortable-nestable.js"></script>
+<script src="/assets/js/chart/knobjs.js"></script>
+<script src="/assets/bundles/apexcharts.bundle.js"></script>
+<script src="/assets/bundles/counterup.bundle.js"></script>
+<script src="/assets/bundles/knobjs.bundle.js"></script>
+<script src="/assets/bundles/c3.bundle.js"></script>
+<script src="/assets/js/core.js"></script>
+<script src="/assets/js/page/project-index.js"></script>
+<script src="/assets/bundles/sweetalert.bundle.js"></script>
+<script src="/assets/bundles/datatables/datatables.min.js"></script>
+<script src="/assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="/assets/js/page/sweetalert.js"></script>
+<script src="/assets/js/modules/pos.js"></script>
+<script>
+    // document.getElementById('btn-add').onclick = function() {
+    //         document.getElementById('addItm').submit();
+    //         var idCom = $("#idCom").val();
+    //         var art_name= $("#art_name").val();
+    //         var art_prix = $("#art_prix").val();
+    //         var art_qut = $("#art_qut").val();
+    //         var art_id = $("#art_id").val();
+    //         var art_unite = $("#art_unite").val();
+    //        // alert(idCom);
+    //         $.ajax({
+    //                 url: '/pos/session/commande/ajaxItem',
+    //                 type: 'POST',
+    //                 cache: false,
+    //                 data: {
+    //                     idCom: idCom,
+    //                     art_name: art_name,
+    //                     art_prix: art_prix,
+    //                     art_qut: art_qut,
+    //                     art_id: art_id,
+    //                     art_unite: art_unite
+    //                 },
+    //                 success: function (data) {
+    //                     //alert(data.item);
+    //                     $("#item").html(data.item);
+    //                 }
+    //             });
+    //     };
+    $(document).ready(function() {
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+            $("#success-alert").slideUp(500);
+        });
+        $('#art_id').change(function(){
+            var cat = $("#art_id").val();
+            $.ajax({
+                url: '/stock/inventaire/vente',
+                type: 'POST',
+                cache: false,
+                data: {
+                    id: cat
+                },
+                success: function (data) {
+                    //alert(data);
+                    $("#prix_vente").html(data.vente);
+                     $("#prix_achat").html(data.achat);
+                }
+            });
+            
+        });
+        $('#filter').change(function(){
+            var value = $(this).val().toLowerCase();
+                var art = $(".Art");
+            //alert(value);
+                $('.Art').each(function() { 
+                    if( $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)) {  
+                        $(this.art).show(); 
+                    } else {
+                        $(this.art).hide(); 
+                    }
+                });
+            
+        });
+    });
+   
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>
 </body>
 </html>

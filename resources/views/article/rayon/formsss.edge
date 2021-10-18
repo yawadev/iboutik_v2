@@ -1,0 +1,105 @@
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">Infos générales</h4>
+        <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+        <div class="heading-elements">
+            <ul class="list-inline mb-0">
+                <li><a data-action="reload"><i class="icon-reload"></i></a></li>
+                <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-body collapse in">
+        <div class="card-block">
+
+            <div class="card-text">
+                <p class="card-text">Vous pouvez modifier les informations de l'entreprise.</p>
+            </div>
+            <br>
+            <form action="/article/create?_method=POST" method="POST">
+                <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">Libellé</label>
+                                    <input type="text" id="name" class="form-control border-success" value="{{ old('name', '') }}" name="name"> {{ elIf('<span>$self</span>', getErrorFor('name'), hasErrorFor('name')) }}
+                                    <input type="hidden" id="agence_id" name="agence_id" value="{{ user.partner_id }}">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="en_achat">État (Achat)</label>
+                                    <select id="en_achat" name="en_achat" class="form-control border-success" required>
+                                      <option value="En achat" selected="" >En achat</option>
+                                      <option value="Hors achat">Hors achat</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="en_vente">État (Vente)</label>
+                                    <select id="en_vente" name="en_vente" class="form-control border-success" required>
+                                      <option value="En vente" selected="" >En vente</option>
+                                      <option value="Hors vente">Hors vente</option>
+                                    </select>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="prix_achat">Prix d'achat</label>
+                                  <div class="input-group">
+                                    <span class="input-group-addon">XOF</span>
+                                    <input type="number" class="form-control square"  name="prix_achat" required>
+                                    <span class="input-group-addon">XOF</span>
+                                  </div>
+                              </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="prix_vente">Prix de vente</label>
+                                  <div class="input-group">
+                                    <span class="input-group-addon">XOF</span>
+                                    <input type="number" class="form-control square"  name="prix_vente" required>
+                                    <span class="input-group-addon">XOF</span>
+                                  </div>
+                              </div>
+                          </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="poids">Poids</label>
+                                    <input type="text" id="poids" class="form-control border-success" value="{{ old('poids', '') }}" name="poids"> {{ elIf('<span>$self</span>', getErrorFor('poids'), hasErrorFor('poids')) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="unite_mesure">Unité de poids</label>
+                                    <select id="unite_mesure" name="unite_mesure" class="form-control border-success" required>
+                                      <option value="Tonne">Tonne</option>
+                                      <option value="Kg" selected="">Kg</option>
+                                      <option value="g">g</option>
+                                      <option value="mg">mg</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="desc">Description</label>
+                        <textarea id="description" rows="5" class="form-control border-success" value="{{ campagne.description }}" name="description" adress></textarea>
+                      </div>
+                    </div>
+                        </div>
+                    </div>
+                <div class="modal-footer">
+                     <button type="button" onclick="window.location.href='/article'" class="btn btn-danger"> <i
+              class="icon-close"></i>
+            Fermer</button>
+                    <button type="submit" class="btn btn-success"> <i class="icon-check2"></i>
+                    Sauvegarder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

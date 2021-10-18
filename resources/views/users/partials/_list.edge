@@ -1,0 +1,113 @@
+<div class="tab-pane fade show active" id="_list" role="tabpanel">
+    <div class="row clearfix">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body ribbon">
+                    <div class="ribbon-box green">Liste des Utilisateurs</div>
+                    <br><br>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="table-1">
+                            <thead>
+                                <tr>
+                                    <th>PRENOM ET NOM</th>
+                                    <th>EMAIL</th>
+                                    <th>RÔLE</th>
+                                    <th>ETAT</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @each(ag in users)
+                                    <tr style="text-decoration: none">
+                                        <td> <a href="/users/view/{{ ag.id }}" >{{ ag.name.toUpperCase() }}</a> </td>
+                                        <td> <a href="/users/view/{{ ag.id }}">{{ ag.email }}</a> </td>
+                                        <td> <a href="/users/view/{{ ag.id }}">{{ ag.role_name }} - {{ ag.agence_name.toUpperCase() }}</a> </td>
+                                        @if(ag.is_activated == 1)
+                                          <td> <span class="tag tag-success">Actif</span></td>
+                                        @else
+                                          <td> <span class="tag tag-danger">Bloquer</span></td>
+                                          
+                                        @endif
+                                        <td>
+                                            @if(user.role_id == 1)
+                                              
+                                        @if(ag.is_activated == 1)
+                                            @if(ag.is_log == 0)
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-toggle="tooltip" data-placement="top" title="Bloquer l'utilisateur" data-target="#basicBlocked{{ ag.id }}"><i class="fa fa-close"></i></button>
+                                            @endif
+                                            
+                                        @else
+                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#basicActived{{ ag.id }}" data-toggle="tooltip" data-placement="top" title="Ré-activer l'utilisateur"><i class="fa fa-check"></i></button>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#basicDelete{{ ag.id }}" data-toggle="tooltip" data-placement="top" title="Supprimer l'utilisateur"><i class="fa fa-trash"></i></button>
+                                          
+                                        @endif
+                                            @endif
+                                            
+                                        </td>
+                                    <div class="modal fade" id="basicDelete{{ ag.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Voulez-vous vraiment supprimer cet enregistrement ?
+                                                </div>
+                                                <div class="modal-footer bg-whitesmoke br">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                                    <a type="button" href="/users/delete/{{ ag.id }}" class="btn btn-primary">Continuer</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="basicBlocked{{ ag.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Voulez-vous vraiment bloquer cet utilisateur ?
+                                                </div>
+                                                <div class="modal-footer bg-whitesmoke br">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                                    <a type="button" href="/users/blocked/{{ ag.id }}" class="btn btn-primary">Continuer</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="basicActived{{ ag.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Voulez-vous vraiment ré-activer cet utilisateur ?
+                                                </div>
+                                                <div class="modal-footer bg-whitesmoke br">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                                    <a type="button" href="/users/activated/{{ ag.id }}" class="btn btn-primary">Continuer</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </tr>
+                                    @endeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+
+        <ul class="metismenu">
+            <li><a href="/pos"><i class="fa fa-bar-chart"></i><span>Tableau de bord</span></a></li>
+            <li><a href="{{ route('/pos/session') }}"><i class="fa fa-store-alt"></i><span>Sessions</span></a></li>
+            <li><a href="/pos/paiement"><i class="fa fa-cash-register"></i><span>Paiements</span></a></li>
+            <li><a href="/pos/client"><i class="fa fa-users"></i><span>Clients</span></a></li>
+            <li><a href="/pos/article"><i class="fa fa-tags"></i><span>Produits</span></a></li>
+            <li><a href="/pos/analyse"><i class="fa fa-area-chart "></i><span>Analyse des ventes</span></a></li>
+           
+            <li><a href="/pos/setting"><i class="fa fa-gear"></i><span>Configuration</span></a></li>
+            
+            <li class="g_heading">Support</li>
+            <li><a href="#"><i class="fa fa-support"></i><span>Documentation</span></a></li>
+            <li>
+                <form method="POST" action="controllers/AuthController.php" id="logout">
+                    <input type="hidden" name="action" value="auth-logout">
+                    <a href="/logout"><i
+                            class="fa fa-sign-out"></i><span>Déconnexion</span></a>
+                </form>
+            </li>
+        </ul>

@@ -1,0 +1,131 @@
+@layout('layout.app')
+@section('content')
+@set('title', 'Campagnes')
+  <div class="section-body mt-4">
+            <div class="container-fluid">
+                <div class="row clearfix">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="card">
+                          <input id="qrId" type="text" value="{{article.qrCode}}"  hidden/>
+                          <div class="card-img-box"><div id="qrcode" style="width:100px; height:100px; margin-top:15px;"></div>
+                        </div>
+
+                            <div class="card-body">
+                                <span style="text-align:center">
+                                    <h3>{{article.name}}</h3>
+                                    <h5>#{{article.qrCode}}</h5>
+                                    <h5 class="card-text">{{article.categorie_name}}</h5>
+                                </span>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Prix de vente: {{article.prix_vente}}</li>
+                                <li class="list-group-item">Quantité: {{article.qut}}</li>
+                            </ul>
+                            <div class="card-body">
+                                <button type="button" data-toggle="modal" data-target="#logoModal" class="btn btn-success btn-block">
+                                    <i class="fa fa-camera"></i> Modifier l'image
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-12">
+                        <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+                           <li class="nav-item">
+                                <a class="nav-link active" id="stock-tab" data-toggle="stock" href="#stock" role="tab" aria-controls="stock" aria-selected="false">Fiche de stock</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="stock" role="tabpanel" aria-labelledby="stock-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Mouvements du stock</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                          <table class="table table-striped" id="tableExport">
+                                              <thead>
+                                                  <tr>
+                                                          <th>Quantité</th>
+                                                          <th>Entrepôt</th>
+                                                          <th>Coût d'achat</th>
+                                                          <th>Prix de vente</th>
+                                                          <th>Action</th>
+                                                      </tr>
+                                              </thead>
+                                              <tbody>
+                                                  @each(ag in stock)
+                                                      <tr>
+                                                          <td> {{ ag.qut }} {{article.unite_mesure}}</td>
+                                                          <td> {{ ag.entrepot_name }}</td>
+                                                          <td> {{ ag.prix_achat }} XOF</td>
+                                                          <td> {{ ag.prix_vente }} XOF</td>
+                                                          <td>
+                                                              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#basicDelete{{ ag.id }}"><i class="fa fa-trash"></i></button>
+                                                          </td>
+                                                          <div class="modal fade" id="basicDelete{{ ag.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                              <div class="modal-dialog" role="document">
+                                                                  <div class="modal-content">
+                                                                      <div class="modal-header">
+                                                                          <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                              <span aria-hidden="true">&times;</span>
+                                                                          </button>
+                                                                      </div>
+                                                                      <div class="modal-body">
+                                                                          Voulez-vous vraiment supprimer ce Produit ?
+                                                                      </div>
+                                                                      <div class="modal-footer bg-whitesmoke br">
+                                                                          <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                                                          <a type="button" href="/stock/article/delete/{{ ag.id }}" class="btn btn-primary">Continuer</a>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                      </tr>
+                                                      @endeach
+                                              </tbody>
+                                          </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                            <!-- Modal -->
+                            <div class="modal fade text-xs-left" id="logoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel2"><i class="icon-road2"></i> Modification</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/users/avatar/{{agent.id}}?_method=PUT" method="POST" enctype="multipart/form-data">
+                                              {{ csrfField() }}
+                                              <div class="form-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <input class="form-control border-success" type="file" name="avatar" id="avatar" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal"> <i
+                                class="icon-close"></i> Fermer</button>
+                                                    <button type="submit" class="btn btn-success"> <i class="icon-check2"></i>
+                              Sauvegarder</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+@endsection

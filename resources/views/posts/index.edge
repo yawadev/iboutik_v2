@@ -1,36 +1,88 @@
 @layout('layout.app')
 
 @section('content')
-  @set('title', 'Blog Demo')
-
-  <div class="relative px-4 pt-16 pb-20 bg-gray-50 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
-    <div class="absolute inset-0">
-      <div class="bg-white h-1/3 sm:h-2/3"></div>
-    </div>
-
-    <div class="relative mx-auto max-w-7xl">
-      {{-- Section Title --}}
-      <div class="text-center">
-        <h2 class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
-          Posts
-        </h2>
-      </div>
-
-      <div class="grid max-w-lg gap-5 mx-auto mt-12 lg:grid-cols-3 lg:max-w-none">
-          {{--
-            Looping over all posts.
-
-            ref: http://edge.adonisjs.com/docs/iteration
-          --}}
-          @each(post in posts, include = 'posts.partials.post-card')
-          @else
-            <div class="col-span-12">
-              @component('components.alert', { type: 'info', color: 'blue' })
-                There's no post available!
-              @endcomponent
+  @set('title', 'Index')
+  
+        <div class="section-body  mt-3">
+            <div class="container-fluid">
+              <div class="row clearfix">
+                    <div class="col-lg-12">
+                        <div class="mb-4">
+                            <h4>Bonjour {{upperCase(user.name) }} !</h4>
+                         </div>                        
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-4 col-sm-6">
+                                        <div class="input-group">
+                                            <button type="submit"  class="btn btn-primary btn-lg btn-block" tabindex="4">
+                                                <i class="fa fa-users"></i> Client
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-4 col-sm-6">
+                                        <div class="input-group">
+                                            <button type="submit"  class="btn btn-primary btn-lg btn-block" tabindex="4">
+                                                <i class="fa fa-file"></i> Facture
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-4 col-sm-6">
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="myInput"  placeholder="Recherche d'articles...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-xl-4 col-lg-12 col-md-12">
+                        <div class="card">
+                            <div class="card-header bg-success text-success">
+                                <h3 class="card-title">Détails Commande</h3>
+                            </div>
+                            <table class="table card-table mt-2">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <p class="mb-0 d-flex justify-content-between"><span>Wonderfood |</span><strong>1</strong>|<strong>1000 XOF</strong></p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>  
+                            <div class="card-footer">
+                              <button type="submit"  class="btn btn-primary btn-lg btn-block" tabindex="4">
+                            <i class="fa fa-check"></i> Paiement
+                        </button>
+                            </div>                      
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-12 col-md-12">
+                      <div class="row row-cards" id="myDIV">
+                          @each(ag in article)
+                                                    
+                                               
+                          <div class="myArt #{{ag.id}} col-sm-6 col-lg-4">
+                              <div class="card p-3">
+                                  <a href="javascript:void(0)" class="mb-3">
+                                      <img src="{{ag.img}}" alt="Photo by Nathan Guerrero" class="rounded">
+                                  </a>
+                                  <div class="d-flex align-items-center">
+                                      <div>{{ag.name}}</div>
+                                  </div>
+                                      <div>1000 XOF</div>
+                              </div>
+                          </div>
+                           @endeach
+                      </div>
+                    </div>
+                </div>  
             </div>
-          @endeach
-      </div>
-    </div>
-  </div>
+        </div>   
 @endsection

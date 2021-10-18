@@ -1,0 +1,35 @@
+@layout('layout.app')
+
+@section('content')
+  @set('title', 'Index')
+  
+        <div class="section-body  mt-3">
+            <div class="container-fluid">
+              <div class="row clearfix">
+                    <div class="col-lg-12">
+                        <div class="mb-4">
+                         </div>                        
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <h4>Commande N° {{commande.recu_num}}</h4>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="myInput"  placeholder="Recherche d'articles...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                   
+                </div>  
+            </div>
+        </div>   
+@endsection

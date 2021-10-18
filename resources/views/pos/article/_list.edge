@@ -1,0 +1,37 @@
+<div class="tab-pane fade show active" id="_list" role="tabpanel">
+    <div class="row clearfix">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body ribbon">
+                    <div class="ribbon-box green">Liste des Produits</div>
+                    <br><br>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="tableExport">
+                            <thead>
+                                <tr>
+                                        <th>Ref:</th>
+                                        <th>Libellé</th>
+                                        <th>Catégorie</th>
+                                        <th>Quantité</th>
+                                        <th>P.U</th>
+                                    </tr>
+                            </thead>
+                            <tbody>
+                                @each(ag in article)
+                                    <tr>
+                    
+                                        <td> <a href="/stock/article/view/{{ ag.id }}">#{{ ag.qrCode }}</a></td>
+                                        <td> <a href="/stock/article/view/{{ ag.id }}">{{ ag.name }}</a></td>
+                                        <td> <a href="/stock/article/view/{{ ag.id }}">{{ ag.categorie_name }}</a></td>
+                                        <td> <a href="/stock/inventaire/view/{{ ag.id }}">{{ ag.qut }} {{ ag.unite_mesure }}</a></td>
+                                        <td> <a href="/stock/inventaire/view/{{ ag.id }}">{{ ag.prix_vente }} XOF</a></td>
+                                    </tr>
+                                    @endeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

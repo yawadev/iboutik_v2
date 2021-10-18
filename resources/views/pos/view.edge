@@ -1,0 +1,305 @@
+@layout('layout.app')
+
+@section('content')
+  @set('title', 'Index')
+  
+        <div class="section-body  mt-3">
+            <div class="container-fluid">
+              <div class="row clearfix">
+                    <div class="col-lg-12">
+                        <div class="mb-4">
+                            <h4>Session N° {{service.service_num}} du {{service.debut_service}}</h4>
+                           
+                         </div>                          
+                    </div>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <h4>Commande N° {{commande.recu_num}}</h4>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="myInput"  placeholder="Recherche d'articles...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-xl-7 col-lg-12 col-md-12">
+                        <div class="card">
+                            <div class="card-header bg-success text-success">
+                                <h3 class="card-title">Détails Commande</h3>
+                            </div>
+                            <table class="table card-table table-striped">
+                                <thead>
+                                <tr>
+                                        <th>Produit</th>
+                                        <th>Qut.</th>
+                                        <th>P.U</th>
+                                        <th>P.T</th>
+                                    </tr>
+                            </thead>
+                                <tbody id="item_list">
+                                    @each(ag in items)
+                                    <tr >
+                                        <td><a href="" data-toggle="modal" data-target="#upItem{{ ag.id }}">{{ag.art_name}}</a></td>
+                                        <td><a href="" data-toggle="modal" data-target="#upItem{{ ag.id }}">{{ag.art_qut}}</a></td>
+                                        <td><a href="" data-toggle="modal" data-target="#upItem{{ ag.id }}">{{ag.art_prix}} XOF</a></td>
+                                        <td><a href="" data-toggle="modal" data-target="#upItem{{ ag.id }}">{{ag.art_montant}} XOF</a></td>
+                                        <td><button type="button" data-toggle="modal" data-target="#delItem{{ ag.id }}" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></button></td>
+                                    </tr>
+                                        <div class="modal fade" id="upItem{{ ag.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Modification produit</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form action="/pos/session/commande/upItem/{{ ag.id }}?_method=POST" id="addItem" method="POST">
+                                                    <div class="modal-body">
+                                                        <div class="row clearfix">
+                                                                <div class="col-lg-4 col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Produit</label>
+                                                                        <div class="input-group">
+                                                                            <input type="text" name="art_name" id="art_name" class="form-control" value="{{ ag.art_name }}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Prix</label>
+                                                                        <div class="input-group">
+                                                                            <input type="number" name="art_prix" id="art_prix" class="form-control" value="{{ ag.art_prix }}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Quantité</label>
+                                                                        <div class="input-group">
+                                                                            <input type="number" name="art_qut" id="art_qut" class="form-control" value="{{ ag.art_qut }}">
+                                                                            <input type="text" name="id" id="id" value="{{ ag.id }}" hidden>
+                                                                            <input type="text" name="idCom" id="idCom" value="{{ commande.id }}" hidden>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer bg-whitesmoke br">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                                        <button type="submit" id="btn-add"class="btn btn-primary">Modifier</button>
+                                                    </div>
+                                                     </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal fade" id="remise" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Remise sur la commande</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form action="/pos/session/commande/remise/{{ commande.id }}?_method=POST" id="remise" method="POST">
+                                                    <div class="modal-body">
+                                                        <div class="row clearfix">
+                                                                <div class="col-lg-12 col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Remise</label>
+                                                                        <div class="input-group">
+                                                                            <input type="number" name="remise" id="remise" class="form-control" value="{{ commande.remise }}">
+                                                                            <input type="number" name="id" value="{{ commande.id }}" hidden>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer bg-whitesmoke br">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                                        <button type="submit" id="btn-add"class="btn btn-primary">Modifier</button>
+                                                    </div>
+                                                     </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="modal fade" id="delItem{{ ag.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Voulez-vous vraiment supprimer cet articles ?
+                                                    </div>
+                                                    <div class="modal-footer bg-whitesmoke br">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                                        <a type="button" href="/pos/session/commande/delItem/{{ ag.id }}" class="btn btn-primary">Continuer</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endeach
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Total</td>
+                                        <td>{{totCom}} XOF</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Remise</td>
+                                        <td>{{commande.remise}} XOF</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Net à payer</td>
+                                        <td>{{totCom-commande.remise}} XOF</td>
+                                    </tr>
+                                </tbody>
+                            </table>  
+                            <div class="card-footer">
+                                <button type="button"  data-toggle="modal" data-target="#remise" class="btn btn-warning " tabindex="4">
+                                    <i class="fas fa-minus"></i> Remise
+                                </button>
+                                 <button type="button"  data-toggle="modal" data-target="#pay" class="btn btn-primary " tabindex="4">
+                                    <i class="fas fa-minus"></i> Paiement
+                                </button>
+                                <button type="button"  class="btn btn-danger " tabindex="4">
+                                    <i class="fas fa-close"></i> Fermer
+                                </button>
+                            </div>                      
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-12 col-md-12">
+                      <div class="row row-cards" id="myDIV">
+                          @each(ag in article)
+                           <div data-toggle="modal" data-target="#basicDelete{{ ag.id }}" id="{{ag.id}}" class="myArt #{{ag.id}} col-sm-6 col-lg-4">
+                                    <div class="card p-3">
+                                        <img src="/{{ag.img}}" alt="{{ag.name}}" class="rounded">
+                                        <div class="d-flex align-items-center">
+                                        <div>{{ag.name}}</div>
+                                        </div>
+                                            <div>{{ag.prix_vente}} XOF</div>
+                                    </div>
+                                </div>
+                                
+                                        <div class="modal fade" id="basicDelete{{ ag.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Ajout produit</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form action="/pos/session/commande/addItem/{{ ag.id }}?_method=POST" id="addItem" method="POST">
+                                                    <div class="modal-body">
+                                                        <div class="row clearfix">
+                                                                <div class="col-lg-4 col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Produit</label>
+                                                                        <div class="input-group">
+                                                                            <input type="text" name="art_name" id="art_name" class="form-control addItem" value="{{ ag.name }}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Prix</label>
+                                                                        <div class="input-group">
+                                                                            <input type="number" name="art_prix" id="art_prix" class="form-control addItem" value="{{ ag.prix_vente }}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Quantité</label>
+                                                                        <div class="input-group">
+                                                                            <input type="number" name="art_qut" id="art_qut" class="form-control addItem" value="1">
+                                                                            <input type="text" name="art_id" id="art_id" value="{{ ag.id }}" class="addItem" hidden>
+                                                                            <input type="text" name="idCom" id="idCom" value="{{ commande.id }}" class="addItem" hidden>
+                                                                            <input type="text" name="art_unite" id="art_unite" value="{{ ag.unite_mesure }}" class="addItem" hidden>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer bg-whitesmoke br">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                                        <button type="submit" id="add_Item" class="btn btn-primary">Ajouter</button>
+                                                    </div>
+                                                     </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                           @endeach
+                      </div>
+                    </div>
+                </div>  
+            </div>
+        </div>   
+        
+                                        <div class="modal fade" id="pay" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Paiement de commande N° {{commande.recu_num}}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form action="/pos/session/commande/upItem/{{ ag.id }}?_method=POST" id="addItem" method="POST">
+                                                    <div class="modal-body">
+                                                        <div class="row clearfix">
+                                                                <div class="col-lg-4 col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Produit</label>
+                                                                        <div class="input-group">
+                                                                            <input type="text" name="art_name" id="art_name" class="form-control" value="{{ ag.art_name }}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Prix</label>
+                                                                        <div class="input-group">
+                                                                            <input type="number" name="art_prix" id="art_prix" class="form-control" value="{{ ag.art_prix }}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4 col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Quantité</label>
+                                                                        <div class="input-group">
+                                                                            <input type="number" name="art_qut" id="art_qut" class="form-control" value="{{ ag.art_qut }}">
+                                                                            <input type="text" name="id" id="id" value="{{ ag.id }}" hidden>
+                                                                            <input type="text" name="idCom" id="idCom" value="{{ commande.id }}" hidden>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer bg-whitesmoke br">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                                        <button type="submit" id="btn-add"class="btn btn-primary">Modifier</button>
+                                                    </div>
+                                                     </form>
+                                                </div>
+                                            </div>
+                                        </div>
+@endsection

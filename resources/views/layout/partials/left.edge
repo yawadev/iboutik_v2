@@ -1,0 +1,16 @@
+<div id="left-sidebar" class="sidebar ">
+    <img alt="IHOTEL" src="/assets/images/logo.png" height="30px">
+    <h5 class="brand-name"> <a href="javascript:void(0)"
+            class="menu_option float-right"></a></h5>
+    <nav id="left-sidebar-nav" class="sidebar-nav">
+        @if(user.role_id=='5')
+            @include('layout.partials.left_super-admin')
+        @elseif( user.role_id=='1')
+          @include('layout.partials.left_admin')
+        @elseif( user.role_id=='4')
+          @include('layout.partials.left_stock')
+        @elseif( user.role_id=='3')
+          @include('layout.partials.left_pos')
+        @endif
+    </nav>
+</div>

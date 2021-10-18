@@ -1,0 +1,77 @@
+<script>
+	    function generatePDF() {
+            const element = document.getElementById('tableExport');
+           html2pdf()
+            .set({ html2canvas: { scale: 4 }, filename: 'inventaire.pdf', jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }})
+            .from(element)
+            .save();
+	    }
+	</script>
+<div class="tab-pane fade show active" id="_list" role="tabpanel">
+    <div class="row clearfix" id="tableExport">
+        <div class="col-lg-12">
+            
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    
+                                    <div class="col-lg-2 col-md-4 col-sm-6">
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="input-group">
+                                        <select id="filter" class="form-control show-tick" required>
+                                            <option value="" selected="">Tous les articles</option>
+                                            @each(ag in article)
+                                                <option value="{{ ag.name }}">{{ ag.name }}</option>
+                                            @endeach
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-4 col-sm-6">
+                                        <div class="input-group">
+                                            <button class="btn btn-primary" onclick="generatePDF()">Exporter en PDF</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <div class="card">
+                <div class="card-body ribbon">
+                    <div class="ribbon-box green">Liste des Produits du {{today}}</div>
+                    <br><br>
+                    <div class="table-responsive">
+                        <table class="table table-striped" >
+                            <thead>
+                                <tr>
+                                        <th>Ref:</th>
+                                        <th>Libellé</th>
+                                        <th>Qut</th>
+                                        <th>Coût Unitaire</th>
+                                        <th>Prix Vente</th>
+                                        <th>Marge</th>
+                                        <th>Date</th>
+                                    </tr>
+                            </thead>
+                            <tbody>
+                                @each(ag in stock)
+                                    <tr class="Art #{{ag.id}}
+                                    ">
+                                        <td> <a href="/stock/inventaire/view/{{ ag.id }}">#00{{ ag.art_id }}</a></td>
+                                        <td > <a href="/stock/inventaire/view/{{ ag.id }}">{{ ag.art_name }}</a></td>
+                                        <td> <a href="/stock/inventaire/view/{{ ag.id }}">{{ ag.qut }} {{ ag.art_unite }}</a></td>
+                                        <td> <a href="/stock/inventaire/view/{{ ag.id }}">{{ ag.prix_achat }} XOF</a></td>
+                                        <td> <a href="/stock/inventaire/view/{{ ag.id }}">{{ ag.prix_vente }} XOF</a></td>
+                                        <td> <a href="/stock/inventaire/view/{{ ag.id }}">{{ ag.marge }} XOF</a></td>
+                                        <td> <a href="/stock/inventaire/view/{{ ag.id }}">{{ ag.created_at }}</a></td>
+                                    </tr>
+                                    @endeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

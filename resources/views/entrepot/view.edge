@@ -1,0 +1,63 @@
+@layout('layout.app')
+@section('content')
+@set('title', 'Entrepôt')
+<div class="content-body">
+  <div class="row clearfix">
+    <div class="col-xl-5 col-md-6 col-sm-12">
+      <div class="card" style="">
+        <div class="card-body">
+          <img class="card-img-top img-fluid" src="/assets/images/entrepot.png" alt="Card image cap">
+          <div class="card-block">
+            <h4 class="card-title">{{entr.name}}</h4>
+            <p class="card-text">{{ entr.adresse }}</p>
+            <a data-toggle="modal" data-target="#addModal" class="btn btn-success block">Modification</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+      <div class="modal fade text-xs-left" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel2"><i class="icon-home"></i> Modification</h4>
+            </div>
+            <div class="modal-body">
+              <form action="/stock/entrepots/update/{{ entr.id }}?_method=PUT" method="POST">
+                <div class="form-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="name">Nom entrepôt</label>
+                        <input type="text" id="name" class="form-control border-success" value="{{ entr.name }}" name="name">
+                        <input type="hidden" id="agence_id"  name="agence_id" value="{{ entr.agence_id }}">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="adres">Adresse</label>
+                        <input class="form-control border-success" id="adresse" type="text" value="{{ entr.adresse }}" name="adresse">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="icon-close"></i>
+                    Fermer</button>
+                  <button type="submit" class="btn btn-success"> <i class="icon-check2"></i>
+                    Sauvegarder</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+@endsection

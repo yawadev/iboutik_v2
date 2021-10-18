@@ -1,0 +1,25 @@
+
+        <ul class="metismenu">
+            <li><a href="/start"><i class="fa fa-bar-chart"></i><span>Tableau de bord</span></a></li>
+            
+            <li><a href="/main-entreprise"><i class="fa fa-users"></i><span>Gestion des Clients</span></a></li>
+            <li>
+                <a href="javascript:void(0)" class="has-arrow arrow-c"><i class="fa fa-gear"
+                        data-placement="right"></i><span>Configuration</span></a>
+                <ul>
+                    <li><a href="/users">Utilisateurs</a> </li>
+                    <li><a href="?a=">Roles & Permissions</a></li>
+                </ul>
+            </li>
+            <li><a href="/corbeille"><i class="fa fa-trash"></i><span>Corbeille</span></a></li>
+            
+            <li class="g_heading">Support</li>
+            <li><a href="#"><i class="fa fa-support"></i><span>Documentation</span></a></li>
+            <li>
+                <form method="POST" action="controllers/AuthController.php" id="logout">
+                    <input type="hidden" name="action" value="auth-logout">
+                    <a href="/logout"><i
+                            class="fa fa-sign-out"></i><span>Déconnexion</span></a>
+                </form>
+            </li>
+        </ul>

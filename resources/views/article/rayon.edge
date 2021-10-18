@@ -1,0 +1,32 @@
+@layout('layout.app')
+
+@section('content')
+    @set('title', 'Gestion des articles')
+    @include('article.rayon._tab')
+    <div class="section-body">
+        <div class="container-fluid">
+            @if(flashMessage('notification'))
+                <div class="alert alert-success alert-dismissible fade show" id="success-alert" role="alert">
+                    {{ flashMessage('notification') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">x</span></button>
+                </div>
+            @endif
+            @if(hasErrorFor('name'))
+            <div class="alert alert-danger alert-dismissible fade show" id="success-alert" role="alert">
+                        {{ getErrorFor('name') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">x</span></button>
+                </div>
+            @endif
+            @if(flashMessage('warning'))
+            <div class="alert alert-danger alert-dismissible fade show" id="success-alert" role="alert">
+                        {{ flashMessage('warning') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">x</span></button>
+                </div>
+            @endif
+            <div class="tab-content">
+                @include('article.rayon._list')
+                @include('article.rayon._form')
+            </div>
+        </div>
+    </div>
+@endsection

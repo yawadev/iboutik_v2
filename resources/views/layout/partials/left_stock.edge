@@ -1,0 +1,33 @@
+
+        <ul class="metismenu">
+            <li><a href="/start"><i class="fa fa-bar-chart"></i><span>Tableau de bord</span></a></li>
+            <li><a href="/stock/inventaire"><i class="fa fa-gear"></i><span>Approvionnement</span></a></li>
+            <li><a href="/stock/fiche_stock"><i class="fa fa-gear"></i><span>Fiche de stock</span></a></li>
+            <li>
+                <a href="javascript:void(0)" class="has-arrow arrow-c"><i class="fa fa-database"
+                        data-placement="right"></i><span>Gestion des Bons</span></a>
+                <ul>
+                    <li><a href="/stock/commande">Bon de Commande</a></li>
+                    <li><a href="/stock/reception">Bon de réception</a></li>
+                    <li><a href="/stock/livraison">Bon de livraison</a></li>
+                </ul>
+            </li>
+            <li><a href="/stock/article/rayon"><i class="fa fa-list"></i><span>Rayons/Familles</span></a></li>
+            <li><a href="/stock/article"><i class="fa fa-gear"></i><span>Produits</span></a></li>
+            <li><a href="/stock/entrepots"><i class="fa fa-gear"></i><span>Entrepots</span></a></li>
+           
+           
+            <li><a href="/stock/setting"><i class="fa fa-gear"></i><span>Configuration</span></a></li>
+            
+            <li><a href="/corbeille"><i class="fa fa-trash"></i><span>Corbeille</span></a></li>
+            
+            <li class="g_heading">Support</li>
+            <li><a href="#"><i class="fa fa-support"></i><span>Documentation</span></a></li>
+            <li>
+                <form method="POST" action="controllers/AuthController.php" id="logout">
+                    <input type="hidden" name="action" value="auth-logout">
+                    <a href="/logout"><i
+                            class="fa fa-sign-out"></i><span>Déconnexion</span></a>
+                </form>
+            </li>
+        </ul>

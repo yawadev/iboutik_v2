@@ -1,0 +1,62 @@
+@if( request.match(['/stock/inventaire']) ||
+                request.match(['/stock/fiche'])||
+                request.match(['/stock/commande'])||
+                request.match(['/stock/commande/view/:id']) ||
+                request.match(['/stock/reception']) ||
+                request.match(['/stock/reception/view/:id']) ||
+                request.match(['/stock/livraison']) ||
+                request.match(['/stock/livraison/view/:id']) ||
+                request.match(['/stock/article']) ||
+                request.match(['/stock/article/view/:id']) ||
+                request.match(['/stock/entrepots']) ||
+                request.match(['/stock/article/rayon']) ||
+                request.match(['/stock/entrepots/view/:id']) ||
+                request.match(['/stock/setting']))
+                @include('layout.partials.left_stock')
+@else
+        <ul class="metismenu">
+            <li><a href="/start"><i class="fa fa-bar-chart"></i><span>Tableau de bord</span></a></li>
+            
+            <li>
+                <a href="javascript:void(0)" class="has-arrow arrow-c"><i class="fa fa-users"
+                        data-placement="right"></i><span>Gestion des tiers</span></a>
+                <ul>
+                    <li><a href="/client">Clients</a> </li>
+                    <li><a href="/fournisseur">Fournisseurs</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="has-arrow arrow-c"><i class="fa fa-check"
+                        data-placement="right"></i><span>Gestion des services</span></a>
+                <ul>
+                    <li><a href="/service/open">Services Ouverts</a> </li>
+                    <li><a href="/service/close">Services Fermer</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="has-arrow arrow-c"><i class="fa fa-database"
+                        data-placement="right"></i><span>Gestion de Stock</span></a>
+                <ul>
+                    <li><a href="/stock/entrepots">Entrepots</a> </li>
+                    <li><a href="/stock/article">Produits</a></li>
+                    <li><a href="/stock/reception">Bon de réception</a></li>
+                    <li><a href="/stock/livraison">Bon de livraison</a></li>
+                    <li><a href="/stock/rapport">Mouvement de stock</a></li>
+                </ul>
+            </li>
+           
+            <li><a href="/users"><i class="fa fa-gear"></i><span>Configuration</span></a></li>
+            
+            <li><a href="/corbeille"><i class="fa fa-trash"></i><span>Corbeille</span></a></li>
+            
+            <li class="g_heading">Support</li>
+            <li><a href="#"><i class="fa fa-support"></i><span>Documentation</span></a></li>
+            <li>
+                <form method="POST" action="controllers/AuthController.php" id="logout">
+                    <input type="hidden" name="action" value="auth-logout">
+                    <a href="/logout"><i
+                            class="fa fa-sign-out"></i><span>Déconnexion</span></a>
+                </form>
+            </li>
+        </ul>
+@endif

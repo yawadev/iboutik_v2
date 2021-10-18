@@ -1,0 +1,128 @@
+<div class="tab-pane fade" id="_form" role="tabpanel">
+    <div class="row clearfix">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body ribbon">
+                    <div class="ribbon-box green">Informations générales</div>
+                    <br><br>
+                    <form action="/stock/article/create?_method=POST" method="POST" class="card-body">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Désignation du produit <span class="text-danger">*</span></label>
+                            <div class="col-md-7">
+                                <input type="text" id="name" name="name" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Catégorie (Famille, rayon...) <span class="text-danger">*</span></label>
+                            <div class="col-md-7">
+                                <select name="categorie_id" class="form-control show-tick">
+                                    @each(ag in cat)
+                                        <option value="{{ ag.id }}">{{ ag.name }}</option>
+                                    @endeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">État (Achat) <span class="text-danger">*</span></label>
+                            <div class="col-md-7">
+                                <select id="en_achat" name="en_achat" class="form-control show-tick" required>
+                                    <option value="1" selected="">Peut être acheté</option>
+                                    <option value="0">Ne peut être acheté</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">État (Vente) <span class="text-danger">*</span></label>
+                            <div class="col-md-7">
+                                <select id="en_vente" name="en_vente" class="form-control" required>
+                                    <option value="1" selected="">Peut être vendu</option>
+                                    <option value="0">Ne peut être vendu</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="card-title green"><h5 class="mb-0">Stock initial</h5></div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Unité de mesure <span class="text-danger">*</span></label>
+                            <div class="col-md-7">
+                                <select id="unite_mesure" name="unite_mesure" class="form-control show-tick" required>
+                                    <option value="" selected="" ></option>
+                                    <option value="Kg" >Kg</option>
+                                    <option value="Litre">Litre</option>
+                                    <option value="Longueur">Longueur</option>
+                                    <option value="Mètre">Mètre</option>
+                                    <option value="Sacs">Sacs</option>
+                                    <option value="Cartons">Cartons</option>
+                                    <option value="Boîtes">Boîtes</option>
+                                    <option value="Sachets">Sachets</option>
+                                    <option value="Bouteille">Bouteille</option>
+                                    <option value="Pièce">Pièce</option>
+                                    <option value="plat">plat</option>
+                                    <option value="Part">Part</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Quantité Min<span class="text-danger">*</span></label>
+                            <div class="col-md-7">
+                                <input type="number" name="qut_min" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Quantité Max<span class="text-danger">*</span></label>
+                            <div class="col-md-7">
+                                <input type="number" name="qut_max" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Quantité Actuelle<span class="text-danger">*</span></label>
+                            <div class="col-md-7">
+                                <input type="number" name="qut" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Entrepôt de stockage <span class="text-danger">*</span></label>
+                            <div class="col-md-7">
+                                <select id="entrepot_id" name="entrepot_id" class="form-control show-tick" required>
+                                     @each(ag in entrepot)
+                                                    <option value="{{ ag.id }}">{{ ag.name }}</option>
+                                                @endeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Coût unitaire <span class="text-danger">*</span></label>
+                            <div class="col-md-7">
+                                <input type="number" name="prix_achat" class="form-control" required>
+                            </div>
+                        </div>
+                         <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Prix de vente <span class="text-danger">*</span></label>
+                            <div class="col-md-7">
+                                <input type="number" name="prix_vente" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Taxes à la vente <span class="text-danger">*</span></label>
+                            <div class="col-md-7">
+                                <select id="taxe" name="taxe" class="form-control show-tick" required>
+                                    <option value="18" selected="">TVA 18%</option>
+                                    <option value="0">Exonoré TVA sur vente</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label"></label>
+                            <div class="col-md-7">
+                                <button class="btn btn-danger">Annuler</button>
+                                <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

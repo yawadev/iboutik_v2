@@ -1,0 +1,105 @@
+@layout('layout.app')
+
+@section('content')
+  @set('title', 'Index')
+  
+        <div class="section-body  mt-3">
+            <div class="container-fluid">
+              <div class="row clearfix">
+                    <div class="col-lg-12">
+                        <div class="mb-4">
+                            <h4>Bonjour {{upperCase(user.name) }} !</h4>
+                         </div>                        
+                    </div>
+                </div>
+                <div class="row clearfix">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-md-flex justify-content-between">
+                                            <ul class="nav nav-tabs b-none">
+                                                <li class="nav-item"><button data-toggle="modal" data-target="#basicAdd" class="btn btn-primary">Nouvelle session</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+                
+                    @each(ag in service)
+                        <div class="row clearfix">
+                            <div class="col-lg-12">
+                                <div class="table-responsive" id="users">
+                                    <table class="table table-hover table-vcenter text-nowrap table_custom border-style list">
+                                        <tbody>
+                                            <tr class="">
+                                                
+                                                    <td>
+                                                        <a href="/pos/session/commande/{{ ag.id }}">
+                                                            <div>Ouvert par:</div>
+                                                            <div class="text-muted">{{ag.user_name}}</div>
+                                                        </a>
+                                                    </td>
+                                                    <td class="hidden-xs">
+                                                        <a href="/pos/session/commande/{{ ag.id }}">
+                                                        <div class="text-muted">Ref: {{ag.service_num}}</div>
+                                                        </a>
+                                                    </td>
+                                                    <td class="hidden-sm">
+                                                        <a href="/pos/session/commande/{{ ag.id }}">
+                                                        <div class="text-muted">Heure début: {{ag.debut_service}}</div>
+                                                        </a>                                                
+                                                    </td>
+                                                    <td class="hidden-sm">
+                                                        <a href="/pos/session/commande/{{ ag.id }}">
+                                                        <div class="text-muted">Heure Fin: {{ag.fin_service}}</div>
+                                                        </a>                                                  
+                                                    </td>
+                                                    <td class="hidden-sm">
+                                                        <a href="/pos/session/commande/{{ ag.id }}">
+                                                        <div class="text-muted">Date: {{ag.date_service}}</div>
+                                                        </a>                                                  
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <a href="/pos/session/commande/{{ ag.id }}">
+                                                        @if(ag.etat_service==1)
+                                                        <div class="text-muted"><span class="tag tag-success">Ouvert</span></div>                                                
+                                                        @else
+                                                            <div class="text-muted"><span class="tag tag-danger">Fermer</span></div>                                                
+                                                        @endif
+                                                        </a>
+                                                    </td>
+                                               
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    @endeach
+            </div>
+        </div>  
+        
+                                        <div class="modal fade" id="basicAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Voulez-vous vraiment ouvrir une nouvelle session ?
+                                                    </div>
+                                                    <div class="modal-footer bg-whitesmoke br">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                                        <form action="/pos/create?_method=POST" method="POST">
+                                                    <input type="text" id="debut_service" class="form-control border-success" value="" name="debut_service" hidden>
+                                                    <li class="nav-item"><button type="submit" class="btn btn-primary">Confirmer</button></li>
+                                                </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+@endsection

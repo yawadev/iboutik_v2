@@ -1,0 +1,214 @@
+<div class="tab-pane fade " id="_log" role="tabpanel">
+    <div class="row clearfix">
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header bg-success text-success">
+                    <h4 class="card-title">Infos générales</h4>
+                    
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+
+                        <div class="card-text">
+                            <p class="card-text">Vous pouvez modifier les informations de l'entreprise.</p>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="content-group">
+                                    <div class="media-body">
+                                        <p class="mb-0"><a href="#">Dénomination Sociale</a></p>
+                                        <p>{{ compagny.name }}</p>
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <div class="media-body">
+                                        <p class="mb-0"><a href="#">NINEA</a></p>
+                                        <p>{{ compagny.ninea }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="content-group">
+                                    <div class="media-body">
+                                        <p class="mb-0"><a href="#">Catégorie</a></p>
+                                        <p>{{ compagny.type }} - {{ compagny.categorie }}</p>
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <div class="media-body">
+                                        <p class="mb-0"><a href="#">Email</a></p>
+                                        <p>{{ compagny.email }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="content-group">
+                                    <div class="media-body">
+                                        <p class="mb-0"><a href="#">Télphone</a></p>
+                                        <p>{{ compagny.phone }}</p>
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <div class="media-body">
+                                        <p class="mb-0"><a href="#">Site Web</a></p>
+                                        <p>{{ compagny.website }}</p>
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <div class="media-body">
+                                        <p class="mb-0"><a href="#">Adresse</a></p>
+                                        <p>{{ compagny.adress }} - {{ compagny.ville }}</p>
+                                    </div>
+                                </div>
+                                <div class="form-actions right">
+                                    <button type="button" data-toggle="modal" data-target="#iconModal" class="btn btn-success">
+                      <i class="icon-check2"></i> Modifier
+                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade text-xs-left" id="iconModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                                                    <h4 class="modal-title" id="myModalLabel2"><i class="icon-road2"></i> Modification</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="/compagny/update/{{compagny.id}}?_method=PUT" method="POST">
+                                                        <div class="form-body">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="name">Dénomination Sociale</label>
+                                                                        <input type="text" id="name" class="form-control border-success" value="{{ compagny.name }}" name="name">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="ninea">NINEA</label>
+                                                                        <input type="text" id="ninea" class="form-control border-success" value="{{ compagny.ninea }}" name="ninea">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label for="userinput5">Email</label>
+                                                                        <input class="form-control border-success" type="email" value="{{ compagny.email }}" id="userinput5" name="email">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label for="userinput6">Site Web</label>
+                                                                        <input class="form-control border-success" type="url" value="{{ compagny.website }}" id="userinput6" name="website">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="userinput7">Télphone</label>
+                                                                        <input class="form-control border-success" id="userinput7" type="tel" value="{{ compagny.phone }}" name="phone">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="userinput7">ville</label>
+                                                                        <input class="form-control border-success" id="userinput7" type="text" value="{{ compagny.ville }}" name="ville">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label for="userinput8">Adresse</label>
+                                                                        <input class="form-control border-success" id="userinput8" type="tel" value="{{ compagny.adress }}" name="adress">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal"> <i
+                                    class="icon-close"></i> Fermer</button>
+                                                            <button type="submit" class="btn btn-success"> <i class="icon-check2"></i>
+                                  Sauvegarder</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header bg-success text-success">
+                    <h4 class="card-title">Logo</h4>
+                    
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+
+                        <div class="card-text">
+                            <p class="card-text">Vous pouvez modifier le logo en choisisant un fichier.</p>
+                        </div>
+                        <br>
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img class="img" src="{{compagny.logo}}" alt="{{user.name}}"  >
+                                </div>
+                            </div>
+
+                        </div>
+                        <br>
+                        <div class="form-actions right">
+                            <button type="button" data-toggle="modal" data-target="#logoModal" class="btn btn-success">
+                  <i class="icon-check2"></i> Modifier le logo
+                </button>
+                            <!-- Modal -->
+                            <div class="modal fade text-xs-left" id="logoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel2"><i class="icon-road2"></i> Modification</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/compagny/logo/{{compagny.id}}?_method=PUT" method="POST" enctype="multipart/form-data">
+                                              {{ csrfField() }}
+                                              <div class="form-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <input class="form-control border-success" type="file" name="logo" id="logo" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal"> <i
+                                class="icon-close"></i> Fermer</button>
+                                                    <button type="submit" class="btn btn-success"> <i class="icon-check2"></i>
+                              Sauvegarder</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,135 @@
+@layout('layout.app')
+
+@section('content')
+  @set('title', 'Index')
+
+  <div class="section-body mt-4">
+            <div class="container-fluid">
+                <div class="row clearfix">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="card">
+                          <div class="card-img-box"><img class="card-profile-img" src="/{{agent.avatar}}" alt="{{agent.name}}" >
+                            </div>
+                            <div class="card-body">
+                                <span style="text-align:center">
+                                    <h3>{{agent.name}}</h3>
+                                    <h5>#000{{agent.id}}</h5>
+                                    <h5 class="card-text">{{agent.role_name}}</h5>
+                                    <h5 class="card-text">{{agent.compagny}}</h5>
+                                    <h5 class="card-text">Agence {{agent.agence_name}}</h5>
+                                </span>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">{{agent.email}}</li>
+                                <li class="list-group-item">{{agent.phone}}</li>
+                            </ul>
+                            <div class="card-body">
+                                <button type="button" data-toggle="modal" data-target="#logoModal" class="btn btn-success btn-block">
+                                    <i class="fa fa-camera"></i> Modifier la photo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-12">
+                        <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+                           <li class="nav-item">
+                                <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            
+                            <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Détails du Profile</h3>
+                                        
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row clearfix">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-label">Entreprise</label>
+                                                    <input type="text" class="form-control" disabled="" placeholder="Company" value="{{agent.compagny}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="form-group">
+                                                    <label class="form-label">Username</label>
+                                                    <input type="text" class="form-control" placeholder="Username" value="{{agent.username}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="form-group">
+                                                    <label class="form-label">Email</label>
+                                                    <input type="email" class="form-control" value="{{agent.email}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="form-group">
+                                                    <label class="form-label">Prénom et Nom</label>
+                                                    <input type="text" class="form-control"  value="{{agent.name}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">Nouveau Mot de passe</label>
+                                                    <input type="password" class="form-control" >
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">Confirmation Mot de passe</label>
+                                                    <input type="password" class="form-control" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer text-right">
+                                        <button type="button" onclick="window.location.href='/users'" class="btn btn-danger"> <i
+                                            class="fa fa-close"></i>
+                                        Fermer</button>
+                                        <button type="submit" class="btn btn-primary">Modifier</button>
+                                    </div>
+                                </div>
+                            </div>                     
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                            <!-- Modal -->
+                            <div class="modal fade text-xs-left" id="logoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel2"><i class="icon-road2"></i> Modification</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/users/avatar/{{agent.id}}?_method=PUT" method="POST" enctype="multipart/form-data">
+                                              {{ csrfField() }}
+                                              <div class="form-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <input class="form-control border-success" type="file" name="avatar" id="avatar" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal"> <i
+                                class="icon-close"></i> Fermer</button>
+                                                    <button type="submit" class="btn btn-success"> <i class="icon-check2"></i>
+                              Sauvegarder</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+@endsection
