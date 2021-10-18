@@ -1,6 +1,5 @@
 # Iboutik web app by IMPACT SOLUTION:triangular_ruler:
 
-This repo contains an example application of the Adonis Framework. You must checkout the source code or the API docs on official website to learn more.
 
 <br />
 <hr />
@@ -10,17 +9,7 @@ This repo contains an example application of the Adonis Framework. You must chec
 
 ## What's in the box?
 
-1. Authentication System
-2. Blogging System
-3. API Testing
-4. Browser Testing
-5. Assets management
+1. Boutique
+2. Restaurant
+3. Pharmacie
 
-## How to run
-
-- Run `npm install` to install all dependencies
-- Make a copy of `.env.example` rename it to `.env`
-- Run `adonis key:generate` to generate the secret key
-- Run `adonis migration:run` to setup the database
-- Run `npm run build` to build static assets
-- Run `adonis serve --dev` to run the application
