@@ -1,4 +1,4 @@
-# Yawa Adonis Blog Demo by IMPACT SOLUTION:triangular_ruler:
+# Iboutik web app by IMPACT SOLUTION:triangular_ruler:
 
 This repo contains an example application of the Adonis Framework. You must checkout the source code or the API docs on official website to learn more.
 
